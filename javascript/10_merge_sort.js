@@ -3,7 +3,7 @@
 const merge_sort = (arr) => {
     let n = arr.length;
     if (n > 1) {
-        let mid = Math.floor(n / 2)
+        let mid = n / 2
         let left = arr.slice(0, mid);
         let right = arr.slice(mid);
         left = merge_sort(left);
@@ -25,15 +25,13 @@ const merge = (left, right, arr) => {
         }
         k += 1;
     }
-    if (i < left.length) {
-        console.log("arr", arr)
-        arr = [...arr.slice(0, k), ...left.slice(i)];
-    } else {
-        arr = [...arr.slice(0, k), ...right.slice(j)];
-    }
-    console.log("final", arr)
+    // if (i < left.length) {
+    //     arr = [...arr.slice(0, k), ...left.slice(i)];
+    // } else {
+    //     arr = [...arr.slice(0, k), ...right.slice(j)];
+    // }
     return arr
 }
 
-let arr = [1, 4, 0, -2, -1, 3, 2, 6, 5];
+let arr = [4, 5, 1, 2, 3, 0, 6];
 console.log(merge_sort(arr));

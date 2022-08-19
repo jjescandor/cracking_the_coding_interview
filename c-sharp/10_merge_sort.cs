@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+
 class Program
 {
     public static void Main(string[] args)
@@ -14,14 +15,11 @@ class Program
     }
     public static int[] MergeSort(int[] arr)
     {
-        int n = arr.Length;
-        if (n > 1)
+        if (arr.Length > 1)
         {
             int mid = arr.Length / 2;
-            int[] left = SliceArr(arr, 0, mid);
-            int[] right = SliceArr(arr, mid, arr.Length);
-            left = MergeSort(left);
-            right = MergeSort(right);
+            int[] left = MergeSort(SliceArr(arr, 0, mid));
+            int[] right = MergeSort(SliceArr(arr, mid, arr.Length));
             arr = Merge(left, right, arr);
         }
         return arr;
@@ -29,7 +27,48 @@ class Program
 
     public static int[] Merge(int[] left, int[] right, int[] arr)
     {
+        int i, j, k;
+        i = j = k = 0;
+        while (i < left.Length && j < right.Length)
+        {
+            if (left[i] <= right[j])
+            {
+                arr[k] = left[i];
+                i++;
+            }
+            else
+            {
+                arr[k] = right[j];
+                j++;
+            }
+            k++;
+        }
+        if (i < left.Length)
+        {
+            arr = MergeArr(SliceArr(arr, 0, k), SliceArr(left, i, left.Length));
+        }
+        else
+        {
+            arr = MergeArr(SliceArr(arr, 0, k), SliceArr(right, j, right.Length));
+        }
         return arr;
+    }
+
+    public static int[] MergeArr(int[] arrOne, int[] arrTwo)
+    {
+        int[] mergedArr = new int[arrOne.Length + arrTwo.Length];
+        for (int i = 0; i < arrOne.Length; i++)
+        {
+            mergedArr[i] = arrOne[i];
+        }
+        int idx = mergedArr.Length - 1;
+        int length = arrTwo.Length;
+        for (int i = 0; i < arrTwo.Length; i++)
+        {
+            mergedArr[idx] = arrTwo[i];
+            idx++;
+        }
+        return mergedArr;
     }
 
     public static int[] SliceArr(int[] arr, int startIndex, int length)
