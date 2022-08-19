@@ -21,4 +21,11 @@ class Program
         }
         return arr;
     }
+    public static T[] ArrayFromRange<T>(T[] originalArray, int startIndex, int length)
+    {
+        int actualLength = Math.Min(length, originalArray.Length - startIndex);
+        T[] copy = new T[actualLength];
+        Array.Copy(originalArray, startIndex, copy, 0, actualLength);
+        return copy;
+    }
 }
