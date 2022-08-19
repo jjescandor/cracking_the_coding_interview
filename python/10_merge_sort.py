@@ -21,7 +21,6 @@ def merge(left, right, arr):
     else:
         arr[k:] = right[j:]
 
-
 if __name__ == "__main__":
     arr = [4, 5, 1, 2, 3, 0, 6 ]
     print(merge_sort(arr))
